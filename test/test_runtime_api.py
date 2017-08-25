@@ -17,16 +17,17 @@ import os
 import sys
 import unittest
 
-import swagger_client
-from swagger_client.rest import ApiException
-from swagger_client.apis.runtime_api import RuntimeApi
+import epm_client
+from epm_client.rest import ApiException
+from epm_client.apis.runtime_api import RuntimeApi
+from epm_client.models import FileUploadBody, FileDownloadBody, CommandExecutionBody
 
 
 class TestRuntimeApi(unittest.TestCase):
     """ RuntimeApi unit test stubs """
 
     def setUp(self):
-        self.api = swagger_client.apis.runtime_api.RuntimeApi()
+        self.api = epm_client.apis.runtime_api.RuntimeApi()
 
     def tearDown(self):
         pass
@@ -37,6 +38,8 @@ class TestRuntimeApi(unittest.TestCase):
 
         Downloads a file from a VDU.
         """
+        file_download_body = FileDownloadBody(path="/tmp/Example.txt")
+        print(self.api.download_file_from_instance(id="82ae4ce1-4e18-4547-beb0-c0309af4b5a9", file_download_body=file_download_body.to_dict()))
         pass
 
     def test_execute_on_instance(self):
@@ -45,6 +48,8 @@ class TestRuntimeApi(unittest.TestCase):
 
         Executes given command on the given VDU.
         """
+        command_exec_body = CommandExecutionBody(command="ls /tmp/", await_completion="true")
+        self.api.execute_on_instance(id="df99cba1-e234-41c6-baf7-b03cfa576107", command_execution_body=command_exec_body.to_dict())
         pass
 
     def test_start_instance(self):
@@ -53,6 +58,7 @@ class TestRuntimeApi(unittest.TestCase):
 
         Starts the given VDU.
         """
+        self.api.start_instance("df99cba1-e234-41c6-baf7-b03cfa576107")
         pass
 
     def test_stop_instance(self):
@@ -61,6 +67,7 @@ class TestRuntimeApi(unittest.TestCase):
 
         Stops the given VDU.
         """
+        self.api.stop_instance("df99cba1-e234-41c6-baf7-b03cfa576107")
         pass
 
     def test_upload_file_to_instance_by_file(self):
@@ -69,6 +76,9 @@ class TestRuntimeApi(unittest.TestCase):
 
         Uploads a file to a VDU.
         """
+        id = "82ae4ce1-4e18-4547-beb0-c0309af4b5a9"
+        remote_path = "/tmp/"
+        self.api.upload_file_to_instance_by_file(id=id, remote_path=remote_path, file="/net/u/rvl/Downloads/Example.txt")
         pass
 
     def test_upload_file_to_instance_by_path(self):
@@ -77,6 +87,11 @@ class TestRuntimeApi(unittest.TestCase):
 
         Uploads a file to a VDU.
         """
+        id = "82ae4ce1-4e18-4547-beb0-c0309af4b5a9"
+        remote_path = "/tmp/"
+        host_path = "/net/u/rvl/Downloads/Example2.txt"
+        file_upload_body = FileUploadBody(remote_path=remote_path, host_path=host_path)
+        self.api.upload_file_to_instance_by_path(id=id, file_upload_body=file_upload_body.to_dict())
         pass
 
 

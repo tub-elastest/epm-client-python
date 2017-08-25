@@ -17,17 +17,17 @@ import os
 import sys
 import unittest
 
-import swagger_client
-from swagger_client.rest import ApiException
-from swagger_client.apis.network_api import NetworkApi
-from swagger_client.models import Network
+import epm_client
+from epm_client.rest import ApiException
+from epm_client.apis.network_api import NetworkApi
+from epm_client.models import Network
 
 
 class TestNetworkApi(unittest.TestCase):
     """ NetworkApi unit test stubs """
 
     def setUp(self):
-        self.api = swagger_client.apis.network_api.NetworkApi()
+        self.api = epm_client.apis.network_api.NetworkApi()
 
     def tearDown(self):
         pass

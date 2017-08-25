@@ -134,7 +134,7 @@ class RESTClientObject(object):
 
         try:
             # For `POST`, `PUT`, `PATCH`, `OPTIONS`, `DELETE`
-            if method in ['POST', 'PUT', 'PATCH', 'OPTIONS', 'DELETE']:
+            if method in ['POST', 'PUT', 'PATCH', 'OPTIONS', 'DELETE'] or (method in ['GET'] and body):
                 if query_params:
                     url += '?' + urlencode(query_params)
                 if re.search('json', headers['Content-Type'], re.IGNORECASE):
@@ -166,7 +166,7 @@ class RESTClientObject(object):
                     request_body = str(request_body)
 
                         #request_body = json.dumps(body)
-                    r = self.pool_manager.request(method, url,
+                    r = self.pool_manager.request_encode_body(method, url,
                                                   body=request_body,
                                                   preload_content=_preload_content,
                                                   timeout=timeout,
@@ -193,6 +193,7 @@ class RESTClientObject(object):
                 # in serialized form
                 elif isinstance(body, str):
                     request_body = body
+
                     r = self.pool_manager.request(method, url,
                                                   body=request_body,
                                                   preload_content=_preload_content,
@@ -230,12 +231,13 @@ class RESTClientObject(object):
 
         return r
 
-    def GET(self, url, headers=None, query_params=None, _preload_content=True, _request_timeout=None):
+    def GET(self, url, headers=None, query_params=None, _preload_content=True, _request_timeout=None, _body=None):
         return self.request("GET", url,
                             headers=headers,
                             _preload_content=_preload_content,
                             _request_timeout=_request_timeout,
-                            query_params=query_params)
+                            query_params=query_params,
+                            body=_body)
 
     def HEAD(self, url, headers=None, query_params=None, _preload_content=True, _request_timeout=None):
         return self.request("HEAD", url,

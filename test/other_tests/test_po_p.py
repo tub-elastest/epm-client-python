@@ -17,9 +17,9 @@ import os
 import sys
 import unittest
 
-import swagger_client
-from swagger_client.rest import ApiException
-from swagger_client.models.po_p import PoP
+import epm_client
+from epm_client.rest import ApiException
+from epm_client.models.po_p import PoP
 
 
 class TestPoP(unittest.TestCase):
@@ -35,7 +35,7 @@ class TestPoP(unittest.TestCase):
         """
         Test PoP
         """
-        model = swagger_client.models.po_p.PoP()
+        model = epm_client.models.po_p.PoP()
 
 
 if __name__ == '__main__':

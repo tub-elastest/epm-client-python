@@ -46,7 +46,7 @@ pip install git+https://github.com/GIT_USER_ID/GIT_REPO_ID.git
 
 Then import the package:
 ```python
-import swagger_client 
+import epm_client
 ```
 
 ### Setuptools
@@ -60,7 +60,7 @@ python setup.py install --user
 
 Then import the package:
 ```python
-import swagger_client
+import epm_client
 ```
 
 ## Getting Started
@@ -70,12 +70,12 @@ Please follow the [installation procedure](#installation--usage) and then run th
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import epm_client
+from epm_client.rest import ApiException
 from pprint import pprint
 # create an instance of the API class
-api_instance = swagger_client.NetworkApi()
-body = swagger_client.Network() # Network | Defintion of a Network which has to be created on a certain PoP
+api_instance = epm_client.NetworkApi()
+body = epm_client.Network() # Network | Defintion of a Network which has to be created on a certain PoP
 
 try:
     # Creates a new network.

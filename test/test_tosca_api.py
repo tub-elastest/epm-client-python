@@ -17,16 +17,16 @@ import os
 import sys
 import unittest
 
-import swagger_client
-from swagger_client.rest import ApiException
-from swagger_client.apis.tosca_api import TOSCAApi
+import epm_client
+from epm_client.rest import ApiException
+from epm_client.apis.tosca_api import TOSCAApi
 
 
 class TestTOSCAApi(unittest.TestCase):
     """ TOSCAApi unit test stubs """
 
     def setUp(self):
-        self.api = swagger_client.apis.tosca_api.TOSCAApi()
+        self.api = epm_client.apis.tosca_api.TOSCAApi()
 
     def tearDown(self):
         pass

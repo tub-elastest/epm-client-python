@@ -17,9 +17,9 @@ import os
 import sys
 import unittest
 
-import swagger_client
-from swagger_client.rest import ApiException
-from swagger_client.models.network import Network
+import epm_client
+from epm_client.rest import ApiException
+from epm_client.models.network import Network
 
 
 class TestNetwork(unittest.TestCase):
@@ -35,7 +35,7 @@ class TestNetwork(unittest.TestCase):
         """
         Test Network
         """
-        model = swagger_client.models.network.Network()
+        model = epm_client.models.network.Network()
 
 
 if __name__ == '__main__':

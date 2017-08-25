@@ -17,9 +17,9 @@ import os
 import sys
 import unittest
 
-import swagger_client
-from swagger_client.rest import ApiException
-from swagger_client.models.command_execution_body import CommandExecutionBody
+import epm_client
+from epm_client.rest import ApiException
+from epm_client.models.command_execution_body import CommandExecutionBody
 
 
 class TestCommandExecutionBody(unittest.TestCase):
@@ -35,7 +35,7 @@ class TestCommandExecutionBody(unittest.TestCase):
         """
         Test CommandExecutionBody
         """
-        model = swagger_client.models.command_execution_body.CommandExecutionBody()
+        model = epm_client.models.command_execution_body.CommandExecutionBody()
 
 
 if __name__ == '__main__':

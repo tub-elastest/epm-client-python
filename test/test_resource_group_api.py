@@ -17,17 +17,17 @@ import os
 import sys
 import unittest
 
-import swagger_client
-from swagger_client.rest import ApiException
-from swagger_client.apis.resource_group_api import ResourceGroupApi
-from swagger_client.models import ResourceGroup, VDU, PoP, Network
+import epm_client
+from epm_client.rest import ApiException
+from epm_client.apis.resource_group_api import ResourceGroupApi
+from epm_client.models import ResourceGroup, VDU, PoP, Network
 
 
 class TestResourceGroupApi(unittest.TestCase):
     """ ResourceGroupApi unit test stubs """
 
     def setUp(self):
-        self.api = swagger_client.apis.resource_group_api.ResourceGroupApi()
+        self.api = epm_client.apis.resource_group_api.ResourceGroupApi()
 
     def tearDown(self):
         pass
@@ -43,7 +43,7 @@ class TestResourceGroupApi(unittest.TestCase):
         vdus = list()
         pop = PoP(interface_endpoint="unix:///var/run/docker.sock", name="test")
         network = Network(name="test-network", po_p_name="test")
-        vdu = VDU(name="test-vdu", image_name="ubuntu", net_name="test-network", po_p_name="test")
+        vdu = VDU(name="test-vdu", image_name="services/rabbitmq", net_name="test-network", po_p_name="test")
         pops.append(pop)
         networks.append(network)
         vdus.append(vdu)
@@ -57,7 +57,7 @@ class TestResourceGroupApi(unittest.TestCase):
 
         Deletes a Resource Group.
         """
-        self.api.delete_resource_group("cf87eb7e-1550-4404-a8e3-084e66500912")
+        self.api.delete_resource_group("7133fe79-cbb0-45aa-a078-0a4bb067c2fc")
         pass
 
     def test_get_all_resource_groups(self):

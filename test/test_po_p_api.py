@@ -16,18 +16,18 @@ from __future__ import absolute_import
 import os
 import sys
 import unittest
-from swagger_client.models import PoP
+from epm_client.models import PoP
 
-import swagger_client
-from swagger_client.rest import ApiException
-from swagger_client.apis.po_p_api import PoPApi
+import epm_client
+from epm_client.rest import ApiException
+from epm_client.apis.po_p_api import PoPApi
 
 
 class TestPoPApi(unittest.TestCase):
     """ PoPApi unit test stubs """
 
     def setUp(self):
-        self.api = swagger_client.apis.po_p_api.PoPApi()
+        self.api = epm_client.apis.po_p_api.PoPApi()
 
     def tearDown(self):
         pass

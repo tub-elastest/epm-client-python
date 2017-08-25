@@ -17,9 +17,9 @@ import os
 import sys
 import unittest
 
-import swagger_client
-from swagger_client.rest import ApiException
-from swagger_client.models.key_value_pair import KeyValuePair
+import epm_client
+from epm_client.rest import ApiException
+from epm_client.models.key_value_pair import KeyValuePair
 
 
 class TestKeyValuePair(unittest.TestCase):
@@ -35,7 +35,7 @@ class TestKeyValuePair(unittest.TestCase):
         """
         Test KeyValuePair
         """
-        model = swagger_client.models.key_value_pair.KeyValuePair()
+        model = epm_client.models.key_value_pair.KeyValuePair()
 
 
 if __name__ == '__main__':

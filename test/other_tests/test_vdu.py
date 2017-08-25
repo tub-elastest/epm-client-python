@@ -17,9 +17,9 @@ import os
 import sys
 import unittest
 
-import swagger_client
-from swagger_client.rest import ApiException
-from swagger_client.models.vdu import VDU
+import epm_client
+from epm_client.rest import ApiException
+from epm_client.models.vdu import VDU
 
 
 class TestVDU(unittest.TestCase):
@@ -35,7 +35,7 @@ class TestVDU(unittest.TestCase):
         """
         Test VDU
         """
-        model = swagger_client.models.vdu.VDU()
+        model = epm_client.models.vdu.VDU()
 
 
 if __name__ == '__main__':

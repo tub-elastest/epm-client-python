@@ -17,17 +17,17 @@ import os
 import sys
 import unittest
 
-import swagger_client
-from swagger_client.rest import ApiException
-from swagger_client.apis.vdu_api import VDUApi
-from swagger_client.models import VDU
+import epm_client
+from epm_client.rest import ApiException
+from epm_client.apis.vdu_api import VDUApi
+from epm_client.models import VDU
 
 
 class TestVDUApi(unittest.TestCase):
     """ VDUApi unit test stubs """
 
     def setUp(self):
-        self.api = swagger_client.apis.vdu_api.VDUApi()
+        self.api = epm_client.apis.vdu_api.VDUApi()
 
     def tearDown(self):
         pass
@@ -38,7 +38,7 @@ class TestVDUApi(unittest.TestCase):
 
         Terminates a VDU.
         """
-        self.api.delete_vdu("843a5753-fa80-41de-9c46-cb8d9754a97f")
+        self.api.delete_vdu("0342b850-6766-4608-a2d3-49dfbd71bf6f")
         pass
 
     def test_deploy_vdu(self):

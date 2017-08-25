@@ -17,9 +17,9 @@ import os
 import sys
 import unittest
 
-import swagger_client
-from swagger_client.rest import ApiException
-from swagger_client.models.file_download_body import FileDownloadBody
+import epm_client
+from epm_client.rest import ApiException
+from epm_client.models.file_download_body import FileDownloadBody
 
 
 class TestFileDownloadBody(unittest.TestCase):
@@ -35,7 +35,7 @@ class TestFileDownloadBody(unittest.TestCase):
         """
         Test FileDownloadBody
         """
-        model = swagger_client.models.file_download_body.FileDownloadBody()
+        model = epm_client.models.file_download_body.FileDownloadBody()
 
 
 if __name__ == '__main__':

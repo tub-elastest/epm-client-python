@@ -39,7 +39,7 @@ class TestRuntimeApi(unittest.TestCase):
         Downloads a file from a VDU.
         """
         file_download_body = FileDownloadBody(path="/tmp/Example.txt")
-        print(self.api.download_file_from_instance(id="82ae4ce1-4e18-4547-beb0-c0309af4b5a9", file_download_body=file_download_body.to_dict()))
+        self.api.download_file_from_instance(id="53879a7c-6cf7-4f68-891c-9f8607e5a2a9", file_download_body=file_download_body.to_dict())
         pass
 
     def test_execute_on_instance(self):

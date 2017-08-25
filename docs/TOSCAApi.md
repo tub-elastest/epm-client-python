@@ -1,4 +1,4 @@
-# swagger_client.TOSCAApi
+# epm_client.TOSCAApi
 
 All URIs are relative to *https://localhost:8180/v1*
 
@@ -18,13 +18,13 @@ The TOSCA template defines VDUs, Networks and the PoPs where to allocate the vir
 ```python
 from __future__ import print_statement
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import epm_client
+from epm_client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
-api_instance = swagger_client.TOSCAApi()
-body = swagger_client.ResourceGroup() # ResourceGroup | TOSCA formatted template
+api_instance = epm_client.TOSCAApi()
+body = epm_client.ResourceGroup() # ResourceGroup | TOSCA formatted template
 
 try: 
     # Deploys a Tosca template.

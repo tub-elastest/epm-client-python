@@ -1,4 +1,4 @@
-# swagger_client.NetworkApi
+# epm_client.NetworkApi
 
 All URIs are relative to *https://localhost:8180/v1*
 
@@ -22,13 +22,13 @@ Creates a new network in the target cloud environment with the given CIDR.
 ```python
 from __future__ import print_statement
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import epm_client
+from epm_client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
-api_instance = swagger_client.NetworkApi()
-body = swagger_client.Network() # Network | Defintion of a Network which has to be created on a certain PoP
+api_instance = epm_client.NetworkApi()
+body = epm_client.Network() # Network | Defintion of a Network which has to be created on a certain PoP
 
 try: 
     # Creates a new network.
@@ -70,12 +70,12 @@ Deletes the network that matches with a given ID.
 ```python
 from __future__ import print_statement
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import epm_client
+from epm_client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
-api_instance = swagger_client.NetworkApi()
+api_instance = epm_client.NetworkApi()
 id = 'id_example' # str | ID of Network
 
 try: 
@@ -118,12 +118,12 @@ Returns all networks with all details.
 ```python
 from __future__ import print_statement
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import epm_client
+from epm_client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
-api_instance = swagger_client.NetworkApi()
+api_instance = epm_client.NetworkApi()
 
 try: 
     # Returns all existing networks.
@@ -162,12 +162,12 @@ Returns the network with the given ID. Returns all its details.
 ```python
 from __future__ import print_statement
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import epm_client
+from epm_client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
-api_instance = swagger_client.NetworkApi()
+api_instance = epm_client.NetworkApi()
 id = 'id_example' # str | ID of Network
 
 try: 
@@ -210,14 +210,14 @@ Updates an existing Network.
 ```python
 from __future__ import print_statement
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import epm_client
+from epm_client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
-api_instance = swagger_client.NetworkApi()
+api_instance = epm_client.NetworkApi()
 id = 'id_example' # str | ID of Network
-body = swagger_client.Network() # Network | Network that needs to be updated.
+body = epm_client.Network() # Network | Network that needs to be updated.
 
 try: 
     # Updates a Network.

@@ -1,4 +1,4 @@
-# swagger_client.RuntimeApi
+# epm_client.RuntimeApi
 
 All URIs are relative to *https://localhost:8180/v1*
 
@@ -23,14 +23,14 @@ Download a file with the given filepath from the given VDU.
 ```python
 from __future__ import print_statement
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import epm_client
+from epm_client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
-api_instance = swagger_client.RuntimeApi()
+api_instance = epm_client.RuntimeApi()
 id = 'id_example' # str | ID of VDU
-file_download_body = swagger_client.FileDownloadBody() # FileDownloadBody | Contains details of the file to be downloaded from the given Instance
+file_download_body = epm_client.FileDownloadBody() # FileDownloadBody | Contains details of the file to be downloaded from the given Instance
 
 try: 
     # Downloads a file from a VDU.
@@ -73,14 +73,14 @@ Executes the given command on the VDU with the given ID.
 ```python
 from __future__ import print_statement
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import epm_client
+from epm_client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
-api_instance = swagger_client.RuntimeApi()
+api_instance = epm_client.RuntimeApi()
 id = 'id_example' # str | ID of VDU
-command_execution_body = swagger_client.CommandExecutionBody() # CommandExecutionBody | Contains command to be executed and a flag if for the completion of the execution should be awaited
+command_execution_body = epm_client.CommandExecutionBody() # CommandExecutionBody | Contains command to be executed and a flag if for the completion of the execution should be awaited
 
 try: 
     # Executes given command on the given VDU.
@@ -123,12 +123,12 @@ Starts the VDU with the given ID.
 ```python
 from __future__ import print_statement
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import epm_client
+from epm_client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
-api_instance = swagger_client.RuntimeApi()
+api_instance = epm_client.RuntimeApi()
 id = 'id_example' # str | ID of VDU
 
 try: 
@@ -170,12 +170,12 @@ Stops the VDU with the given ID.
 ```python
 from __future__ import print_statement
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import epm_client
+from epm_client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
-api_instance = swagger_client.RuntimeApi()
+api_instance = epm_client.RuntimeApi()
 id = 'id_example' # str | ID of VDU
 
 try: 
@@ -217,12 +217,12 @@ Uploads a given file to the given filepath to the given VDU.
 ```python
 from __future__ import print_statement
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import epm_client
+from epm_client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
-api_instance = swagger_client.RuntimeApi()
+api_instance = epm_client.RuntimeApi()
 id = 'id_example' # str | ID of VDU
 remote_path = 'remote_path_example' # str | Absolute path where the file should go on the Instance
 file = '/path/to/file.txt' # file | File which has to be uploaded to the Instance. Either this or the hostPath but not both can be provided.
@@ -268,14 +268,14 @@ Uploads a given file from the host path to the given file path to the given VDU.
 ```python
 from __future__ import print_statement
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import epm_client
+from epm_client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
-api_instance = swagger_client.RuntimeApi()
+api_instance = epm_client.RuntimeApi()
 id = 'id_example' # str | ID of VDU
-file_upload_body = swagger_client.FileUploadBody() # FileUploadBody | Contains details of the file with the given path to upload to the Instance
+file_upload_body = epm_client.FileUploadBody() # FileUploadBody | Contains details of the file with the given path to upload to the Instance
 
 try: 
     # Uploads a file to a VDU.

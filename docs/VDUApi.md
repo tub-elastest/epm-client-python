@@ -1,4 +1,4 @@
-# swagger_client.VDUApi
+# epm_client.VDUApi
 
 All URIs are relative to *https://localhost:8180/v1*
 
@@ -22,12 +22,12 @@ Terminates the VDU that matches with a given ID.
 ```python
 from __future__ import print_statement
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import epm_client
+from epm_client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
-api_instance = swagger_client.VDUApi()
+api_instance = epm_client.VDUApi()
 id = 'id_example' # str | ID of VDU
 
 try: 
@@ -70,13 +70,13 @@ Allocates resources defined as a VDU in the cloud to be deployed in the target c
 ```python
 from __future__ import print_statement
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import epm_client
+from epm_client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
-api_instance = swagger_client.VDUApi()
-body = swagger_client.VDU() # VDU | Defintion of a VDU which defines resources that have to be deployed
+api_instance = epm_client.VDUApi()
+body = epm_client.VDU() # VDU | Defintion of a VDU which defines resources that have to be deployed
 
 try: 
     # Allocates resources in the target cloud.
@@ -118,12 +118,12 @@ Returns all VDUs with all its details.
 ```python
 from __future__ import print_statement
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import epm_client
+from epm_client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
-api_instance = swagger_client.VDUApi()
+api_instance = epm_client.VDUApi()
 
 try: 
     # Returns all VDUs.
@@ -162,12 +162,12 @@ Returns the VDU with the given ID. Returns all its details.
 ```python
 from __future__ import print_statement
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import epm_client
+from epm_client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
-api_instance = swagger_client.VDUApi()
+api_instance = epm_client.VDUApi()
 id = 'id_example' # str | ID of VDU
 
 try: 
@@ -210,14 +210,14 @@ Updates an already deployed VDU.
 ```python
 from __future__ import print_statement
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import epm_client
+from epm_client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
-api_instance = swagger_client.VDUApi()
+api_instance = epm_client.VDUApi()
 id = 'id_example' # str | ID of VDU
-body = swagger_client.VDU() # VDU | VDU object that needs to be updated.
+body = epm_client.VDU() # VDU | VDU object that needs to be updated.
 
 try: 
     # Updates a VDU.

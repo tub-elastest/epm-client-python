@@ -1,4 +1,4 @@
-# swagger_client.ResourceGroupApi
+# epm_client.ResourceGroupApi
 
 All URIs are relative to *https://localhost:8180/v1*
 
@@ -22,13 +22,13 @@ Creates a new Resource Group and allocates the defined resources in the defined 
 ```python
 from __future__ import print_statement
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import epm_client
+from epm_client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
-api_instance = swagger_client.ResourceGroupApi()
-body = swagger_client.ResourceGroup() # ResourceGroup | Defintion of a Resource Group which includes all VDUs, Network and respective PoPs
+api_instance = epm_client.ResourceGroupApi()
+body = epm_client.ResourceGroup() # ResourceGroup | Defintion of a Resource Group which includes all VDUs, Network and respective PoPs
 
 try: 
     # Creates a new Resource Group.
@@ -70,12 +70,12 @@ Deletes the Resource Group that matches with a given ID.
 ```python
 from __future__ import print_statement
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import epm_client
+from epm_client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
-api_instance = swagger_client.ResourceGroupApi()
+api_instance = epm_client.ResourceGroupApi()
 id = 'id_example' # str | ID of ResourceGroup
 
 try: 
@@ -118,12 +118,12 @@ Returns all Resource Groups with all details.
 ```python
 from __future__ import print_statement
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import epm_client
+from epm_client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
-api_instance = swagger_client.ResourceGroupApi()
+api_instance = epm_client.ResourceGroupApi()
 
 try: 
     # Returns all Resource Groups.
@@ -162,12 +162,12 @@ Returns the Resource Group with the given ID. Returns all its details.
 ```python
 from __future__ import print_statement
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import epm_client
+from epm_client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
-api_instance = swagger_client.ResourceGroupApi()
+api_instance = epm_client.ResourceGroupApi()
 id = 'id_example' # str | ID of ResourceGroup
 
 try: 
@@ -210,14 +210,14 @@ Updates an existing ResourceGroup.
 ```python
 from __future__ import print_statement
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import epm_client
+from epm_client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
-api_instance = swagger_client.ResourceGroupApi()
+api_instance = epm_client.ResourceGroupApi()
 id = 'id_example' # str | ID of ResourceGroup
-body = swagger_client.ResourceGroup() # ResourceGroup | ResourceGroup that needs to be updated.
+body = epm_client.ResourceGroup() # ResourceGroup | ResourceGroup that needs to be updated.
 
 try: 
     # Updates a ResourceGroup.

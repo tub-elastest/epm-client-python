@@ -1,4 +1,4 @@
-# swagger_client.PoPApi
+# epm_client.PoPApi
 
 All URIs are relative to *https://localhost:8180/v1*
 
@@ -22,12 +22,12 @@ Returns all PoPs with all its details.
 ```python
 from __future__ import print_statement
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import epm_client
+from epm_client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
-api_instance = swagger_client.PoPApi()
+api_instance = epm_client.PoPApi()
 
 try: 
     # Returns all PoPs.
@@ -66,12 +66,12 @@ Returns the PoP with the given ID. Returns all its details.
 ```python
 from __future__ import print_statement
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import epm_client
+from epm_client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
-api_instance = swagger_client.PoPApi()
+api_instance = epm_client.PoPApi()
 id = 'id_example' # str | ID of PoP
 
 try: 
@@ -114,13 +114,13 @@ Registers a new Point-of-Presence represented by a PoP
 ```python
 from __future__ import print_statement
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import epm_client
+from epm_client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
-api_instance = swagger_client.PoPApi()
-body = swagger_client.PoP() # PoP | Defintion of a PoP which defines a Point-of-Presence used to host resources
+api_instance = epm_client.PoPApi()
+body = epm_client.PoP() # PoP | Defintion of a PoP which defines a Point-of-Presence used to host resources
 
 try: 
     # Registers a new PoP
@@ -162,12 +162,12 @@ Unregisters the PoP that matches with a given ID.
 ```python
 from __future__ import print_statement
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import epm_client
+from epm_client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
-api_instance = swagger_client.PoPApi()
+api_instance = epm_client.PoPApi()
 id = 'id_example' # str | ID of PoP
 
 try: 
@@ -210,14 +210,14 @@ Updates an already registered PoP.
 ```python
 from __future__ import print_statement
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import epm_client
+from epm_client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
-api_instance = swagger_client.PoPApi()
+api_instance = epm_client.PoPApi()
 id = 'id_example' # str | ID of PoP
-body = swagger_client.PoP() # PoP | PoP object that needs to be updated.
+body = epm_client.PoP() # PoP | PoP object that needs to be updated.
 
 try: 
     # Updates a PoP.

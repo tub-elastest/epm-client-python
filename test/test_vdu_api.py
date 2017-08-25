@@ -20,6 +20,7 @@ import unittest
 import swagger_client
 from swagger_client.rest import ApiException
 from swagger_client.apis.vdu_api import VDUApi
+from swagger_client.models import VDU
 
 
 class TestVDUApi(unittest.TestCase):
@@ -37,6 +38,7 @@ class TestVDUApi(unittest.TestCase):
 
         Terminates a VDU.
         """
+        self.api.delete_vdu("843a5753-fa80-41de-9c46-cb8d9754a97f")
         pass
 
     def test_deploy_vdu(self):
@@ -45,6 +47,8 @@ class TestVDUApi(unittest.TestCase):
 
         Allocates resources in the target cloud.
         """
+        vdu = VDU(name="test-vdu", image_name="ubuntu", net_name="test-network", po_p_name="test")
+        self.api.deploy_vdu(vdu.to_dict())
         pass
 
     def test_get_all_vdus(self):
@@ -53,6 +57,7 @@ class TestVDUApi(unittest.TestCase):
 
         Returns all VDUs.
         """
+        self.api.get_all_vdus()
         pass
 
     def test_get_vdu_by_id(self):
@@ -61,6 +66,7 @@ class TestVDUApi(unittest.TestCase):
 
         Returns a VDU.
         """
+        self.api.get_vdu_by_id("843a5753-fa80-41de-9c46-cb8d9754a97f")
         pass
 
     def test_update_vdu(self):

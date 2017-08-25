@@ -20,6 +20,7 @@ import unittest
 import swagger_client
 from swagger_client.rest import ApiException
 from swagger_client.apis.network_api import NetworkApi
+from swagger_client.models import Network
 
 
 class TestNetworkApi(unittest.TestCase):
@@ -37,6 +38,8 @@ class TestNetworkApi(unittest.TestCase):
 
         Creates a new network.
         """
+        network = Network(name="test-network",cidr="192.168.5.1/24",po_p_name="test")
+        self.api.create_network(network.to_dict())
         pass
 
     def test_delete_network(self):
@@ -45,6 +48,7 @@ class TestNetworkApi(unittest.TestCase):
 
         Deletes a network.
         """
+        self.api.delete_network("7f5ebaf0-13a4-4c82-a905-f563c7815b92")
         pass
 
     def test_get_all_networks(self):
@@ -53,6 +57,7 @@ class TestNetworkApi(unittest.TestCase):
 
         Returns all existing networks.
         """
+        self.api.get_all_networks()
         pass
 
     def test_get_network_by_id(self):
@@ -61,6 +66,7 @@ class TestNetworkApi(unittest.TestCase):
 
         Returns a network.
         """
+        self.api.get_network_by_id("36255e82-f536-4bf0-8af5-a04c9ed37fc3")
         pass
 
     def test_update_network(self):
@@ -69,6 +75,8 @@ class TestNetworkApi(unittest.TestCase):
 
         Updates a Network.
         """
+        network = Network(name="test-network2",cidr="192.168.5.1/24",po_p_name="test")
+        self.api.update_network("36255e82-f536-4bf0-8af5-a04c9ed37fc3", network.to_dict())
         pass
 
 

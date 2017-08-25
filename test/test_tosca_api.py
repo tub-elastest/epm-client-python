@@ -37,6 +37,9 @@ class TestTOSCAApi(unittest.TestCase):
 
         Deploys a Tosca template.
         """
+        service_template = open("resources/service_template.yaml")
+        self.api.deploy_tosca_template(service_template.read())
+        service_template.close()
         pass
 
 

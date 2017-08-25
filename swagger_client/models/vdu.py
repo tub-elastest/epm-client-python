@@ -287,7 +287,7 @@ class VDU(object):
         :type: str
         """
         allowed_values = ["initializing", "initialized", "deploying", "deployed", "running", "undeploying", "undeployed", "error"]
-        if status not in allowed_values:
+        if status.lower() not in allowed_values:
             raise ValueError(
                 "Invalid value for `status` ({0}), must be one of {1}"
                 .format(status, allowed_values)
@@ -302,22 +302,23 @@ class VDU(object):
         result = {}
 
         for attr, _ in iteritems(self.swagger_types):
+            java_attr = self.attribute_map[attr]
             value = getattr(self, attr)
             if isinstance(value, list):
-                result[attr] = list(map(
+                result[java_attr] = list(map(
                     lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
                     value
                 ))
             elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
+                result[java_attr] = value.to_dict()
             elif isinstance(value, dict):
-                result[attr] = dict(map(
+                result[java_attr] = dict(map(
                     lambda item: (item[0], item[1].to_dict())
                     if hasattr(item[1], "to_dict") else item,
                     value.items()
                 ))
             else:
-                result[attr] = value
+                result[java_attr] = value
 
         return result
 

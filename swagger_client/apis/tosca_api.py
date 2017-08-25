@@ -127,7 +127,7 @@ class TOSCAApi(object):
 
         # HTTP header `Content-Type`
         header_params['Content-Type'] = self.api_client.\
-            select_header_content_type(['multipart/form-data'])
+            select_header_content_type(['text/yaml'])
 
         # Authentication setting
         auth_settings = []

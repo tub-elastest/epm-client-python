@@ -1,0 +1,4 @@
+{
+  "name": "docker-local",
+  "interfaceEndpoint": "unix:///var/run/docker.sock"
+}

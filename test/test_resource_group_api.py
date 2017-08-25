@@ -20,6 +20,7 @@ import unittest
 import swagger_client
 from swagger_client.rest import ApiException
 from swagger_client.apis.resource_group_api import ResourceGroupApi
+from swagger_client.models import ResourceGroup, VDU, PoP, Network
 
 
 class TestResourceGroupApi(unittest.TestCase):
@@ -37,6 +38,17 @@ class TestResourceGroupApi(unittest.TestCase):
 
         Creates a new Resource Group.
         """
+        pops = list()
+        networks = list()
+        vdus = list()
+        pop = PoP(interface_endpoint="unix:///var/run/docker.sock", name="test")
+        network = Network(name="test-network", po_p_name="test")
+        vdu = VDU(name="test-vdu", image_name="ubuntu", net_name="test-network", po_p_name="test")
+        pops.append(pop)
+        networks.append(network)
+        vdus.append(vdu)
+        resourceGroup = ResourceGroup(name="test-resourcegroup", pops=pops, networks=networks, vdus=vdus)
+        self.api.create_resource_group(resourceGroup.to_dict())
         pass
 
     def test_delete_resource_group(self):
@@ -45,6 +57,7 @@ class TestResourceGroupApi(unittest.TestCase):
 
         Deletes a Resource Group.
         """
+        self.api.delete_resource_group("cf87eb7e-1550-4404-a8e3-084e66500912")
         pass
 
     def test_get_all_resource_groups(self):
@@ -53,6 +66,7 @@ class TestResourceGroupApi(unittest.TestCase):
 
         Returns all Resource Groups.
         """
+        self.api.get_all_resource_groups()
         pass
 
     def test_get_resource_group_by_id(self):
@@ -61,6 +75,7 @@ class TestResourceGroupApi(unittest.TestCase):
 
         Returns a Resource Group.
         """
+        self.api.get_resource_group_by_id("cf87eb7e-1550-4404-a8e3-084e66500912")
         pass
 
     def test_update_resource_group(self):

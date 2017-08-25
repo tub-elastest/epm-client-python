@@ -140,7 +140,32 @@ class RESTClientObject(object):
                 if re.search('json', headers['Content-Type'], re.IGNORECASE):
                     request_body = None
                     if body:
-                        request_body = json.dumps(body)
+                        request_body = body
+                        # Search in depth for variables with the value None and delete them
+                        def search(struct):
+                            if isinstance(struct, list):
+                                for k in struct:
+                                    if isinstance(k, dict) or isinstance(k, list):
+                                        search(k)
+                            if isinstance(struct, dict):
+                                deletables = []
+                                next_layer = []
+                                for k in struct:
+                                    if struct[k] == None:
+                                        deletables.append(k)
+                                    if isinstance(struct[k], dict):
+                                        next_layer.append(struct[k])
+                                    if isinstance(struct[k], list):
+                                        search(struct[k])
+                                for k in deletables:
+                                    del struct[k]
+                                for k in next_layer:
+                                    search(k)
+
+                        search(request_body)
+                    request_body = str(request_body)
+
+                        #request_body = json.dumps(body)
                     r = self.pool_manager.request(method, url,
                                                   body=request_body,
                                                   preload_content=_preload_content,

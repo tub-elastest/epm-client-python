@@ -88,6 +88,8 @@ Class | Method | HTTP request | Description
 *NetworkApi* | [**get_all_networks**](docs/NetworkApi.md#get_all_networks) | **GET** /network | Returns all existing networks.
 *NetworkApi* | [**get_network_by_id**](docs/NetworkApi.md#get_network_by_id) | **GET** /network/{id} | Returns a network.
 *NetworkApi* | [**update_network**](docs/NetworkApi.md#update_network) | **PATCH** /network/{id} | Updates a Network.
+*PackageApi* | [**delete_package**](docs/PackageApi.md#delete_package) | **DELETE** /packages/{id} | Deletes a package.
+*PackageApi* | [**receive_package**](docs/PackageApi.md#receive_package) | **POST** /packages | Receives a package.
 *PoPApi* | [**get_all_po_ps**](docs/PoPApi.md#get_all_po_ps) | **GET** /pop | Returns all PoPs.
 *PoPApi* | [**get_po_p_by_id**](docs/PoPApi.md#get_po_p_by_id) | **GET** /pop/{id} | Returns a PoP.
 *PoPApi* | [**register_po_p**](docs/PoPApi.md#register_po_p) | **POST** /pop | Registers a new PoP

@@ -1,7 +1,7 @@
 swagger: '2.0'
 info:
   description: REST API description of the ElasTest Platform Manager Module.
-  version: 0.1.2
+  version: 0.8.0
   title: EPM REST API
   contact: {}
   license:

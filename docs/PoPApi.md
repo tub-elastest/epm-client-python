@@ -7,6 +7,7 @@ Method | HTTP request | Description
 [**get_all_po_ps**](PoPApi.md#get_all_po_ps) | **GET** /pop | Returns all PoPs.
 [**get_po_p_by_id**](PoPApi.md#get_po_p_by_id) | **GET** /pop/{id} | Returns a PoP.
 [**register_po_p**](PoPApi.md#register_po_p) | **POST** /pop | Registers a new PoP
+[**register_worker**](PoPApi.md#register_worker) | **POST** /pop/{id} | Starts a worker
 [**unregister_po_p**](PoPApi.md#unregister_po_p) | **DELETE** /pop/{id} | Unregisters a PoP.
 [**update_po_p**](PoPApi.md#update_po_p) | **PATCH** /pop/{id} | Updates a PoP.
 
@@ -20,7 +21,7 @@ Returns all PoPs with all its details.
 
 ### Example 
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import epm_client
 from epm_client.rest import ApiException
@@ -64,7 +65,7 @@ Returns the PoP with the given ID. Returns all its details.
 
 ### Example 
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import epm_client
 from epm_client.rest import ApiException
@@ -112,7 +113,7 @@ Registers a new Point-of-Presence represented by a PoP
 
 ### Example 
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import epm_client
 from epm_client.rest import ApiException
@@ -151,6 +152,56 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **register_worker**
+> PoP register_worker(id, private_key)
+
+Starts a worker
+
+Provides the private key for executing the commands needed for starting the adapters inside a worker
+
+### Example 
+```python
+from __future__ import print_function
+import time
+import epm_client
+from epm_client.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = epm_client.PoPApi()
+id = 'id_example' # str | ID of PoP
+private_key = '/path/to/file.txt' # file | The private key for registering the adapters inside the worker
+
+try: 
+    # Starts a worker
+    api_response = api_instance.register_worker(id, private_key)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling PoPApi->register_worker: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **str**| ID of PoP | 
+ **private_key** | **file**| The private key for registering the adapters inside the worker | 
+
+### Return type
+
+[**PoP**](PoP.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: multipart/form-data
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **unregister_po_p**
 > str unregister_po_p(id)
 
@@ -160,7 +211,7 @@ Unregisters the PoP that matches with a given ID.
 
 ### Example 
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import epm_client
 from epm_client.rest import ApiException
@@ -208,7 +259,7 @@ Updates an already registered PoP.
 
 ### Example 
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import epm_client
 from epm_client.rest import ApiException

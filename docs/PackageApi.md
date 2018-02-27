@@ -1,4 +1,4 @@
-# swagger_client.PackageApi
+# epm_client.PackageApi
 
 All URIs are relative to *https://localhost:8180/v1*
 

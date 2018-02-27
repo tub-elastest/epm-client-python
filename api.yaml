@@ -23,9 +23,9 @@ paths:
           description: TOSCA formatted template
           required: true
           schema:
-            $ref: '#/definitions/ResourceGroup'
+            type: string
       consumes:
-        - multipart/form-data
+        - text/yaml
       produces:
         - application/json
       responses:
@@ -357,6 +357,72 @@ paths:
           description: Network not found
           schema:
             type: string
+  /packages:
+    post:
+      tags:
+        - Package
+      summary: Receives a package.
+      description: Receives a package so that it can be forwarded to the correct environment.
+      operationId: receivePackage
+      consumes:
+        - multipart/form-data
+      produces:
+        - application/json
+      parameters:
+        - in: formData
+          name: file
+          description: Package in a multipart form
+          required: true
+          type: file
+      responses:
+        '200':
+          description: Package received OK
+          schema:
+            $ref: '#/definitions/ResourceGroup'
+        '201':
+          description: Created
+        '400':
+          description: Bad Request
+          schema:
+            type: string
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+          schema:
+            type: string
+  '/packages/{id}':
+    delete:
+      tags:
+        - Package
+      summary: Deletes a package.
+      description: Deletes the package that matches with a given ID.
+      operationId: deletePackage
+      parameters:
+        - name: id
+          in: path
+          description: ID of Package
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Package deleted successfully
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+          schema:
+            type: string
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Package not found
+          schema:
+            type: string
   /pop:
     get:
       tags:
@@ -410,6 +476,44 @@ paths:
           schema:
             type: string
   '/pop/{id}':
+    post:
+      tags:
+        - PoP
+      summary: Starts a worker
+      description: Provides the private key for executing the commands needed for starting the adapters inside a worker
+      operationId: registerWorker
+      consumes:
+        - multipart/form-data
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          description: ID of PoP
+          required: true
+          type: string
+        - in: formData
+          name: privateKey
+          description: The private key for registering the adapters inside the worker
+          required: true
+          type: file
+          schema:
+            $ref: '#/definitions/PoP'
+      responses:
+        '200':
+          description: Worker Registration OK
+          schema:
+            $ref: '#/definitions/PoP'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+          schema:
+            type: string
     get:
       tags:
         - PoP

@@ -15,7 +15,7 @@ import sys
 from setuptools import setup, find_packages
 
 NAME = "epm_client"
-VERSION = "0.8.0"
+VERSION = "0.8.1-SNAPSHOT"
 # To install the library, run the following
 #
 # python setup.py install

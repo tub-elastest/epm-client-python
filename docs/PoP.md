@@ -10,6 +10,6 @@ Name | Type | Description | Notes
 **interface_info** | [**list[KeyValuePair]**](KeyValuePair.md) | Information about the interface(s) to the PoP, including PoP provider type, API version, and protocol type. | [optional] 
 **name** | **str** | Human-readable identifier of this PoP information element | 
 
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[[Back to Model list]](index.md#documentation-for-models) [[Back to API list]](index.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

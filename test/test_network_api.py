@@ -39,7 +39,7 @@ class TestNetworkApi(unittest.TestCase):
         Creates a new network.
         """
         network = Network(name="test-network",cidr="192.168.5.1/24",po_p_name="test")
-        self.api.create_network(network.to_dict())
+        self.api.create_network(network)
         pass
 
     def test_delete_network(self):

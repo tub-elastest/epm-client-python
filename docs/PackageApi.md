@@ -17,7 +17,7 @@ Deletes the package that matches with a given ID.
 
 ### Example 
 ```python
-from __future__ import print_function
+from __future__ import print_statement
 import time
 import epm_client
 from epm_client.rest import ApiException
@@ -64,7 +64,7 @@ Receives a package so that it can be forwarded to the correct environment.
 
 ### Example 
 ```python
-from __future__ import print_function
+from __future__ import print_statement
 import time
 import epm_client
 from epm_client.rest import ApiException

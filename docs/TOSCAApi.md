@@ -24,7 +24,7 @@ from pprint import pprint
 
 # create an instance of the API class
 api_instance = epm_client.TOSCAApi()
-body = epm_client.ResourceGroup() # ResourceGroup | TOSCA formatted template
+body = 'body_example' # str | TOSCA formatted template
 
 try: 
     # Deploys a Tosca template.
@@ -38,7 +38,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**ResourceGroup**](ResourceGroup.md)| TOSCA formatted template | 
+ **body** | **str**| TOSCA formatted template | 
 
 ### Return type
 

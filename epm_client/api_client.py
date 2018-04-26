@@ -343,7 +343,7 @@ class ApiClient(object):
                                         query_params=query_params,
                                         _preload_content=_preload_content,
                                         _request_timeout=_request_timeout,
-                                        headers=headers, _body=body)
+                                        headers=headers)
         elif method == "HEAD":
             return self.rest_client.HEAD(url,
                                          query_params=query_params,

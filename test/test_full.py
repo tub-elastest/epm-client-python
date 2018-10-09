@@ -37,7 +37,7 @@ class FullTest(unittest.TestCase):
                 ansible_found = True
         assert ansible_found
 
-        os_pop = PoP( interface_endpoint="<REPLACE>", interface_info=[{"key": "type", "value": "<REPLACE>"},
+        os_pop = PoP( interface_endpoint="<REPLACE>", interface_info=[{"key": "type", "value": "openstack"},
                                                                                    {"key": "username",
                                                                                     "value": "<REPLACE>"},
                                                                                    {"key": "password",
@@ -49,6 +49,7 @@ class FullTest(unittest.TestCase):
         self.pop_api.register_po_p(os_pop)
 
         ansible_package = self.package_api.receive_package(file='resources/ansible-package.tar')
+        print(ansible_package)
 
         sleep(15)
 

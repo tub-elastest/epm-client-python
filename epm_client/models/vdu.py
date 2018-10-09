@@ -114,8 +114,8 @@ class VDU(object):
         :param compute_id: The compute_id of this VDU.  # noqa: E501
         :type: str
         """
-        if compute_id is None:
-            raise ValueError("Invalid value for `compute_id`, must not be `None`")  # noqa: E501
+        #if compute_id is None:
+            #raise ValueError("Invalid value for `compute_id`, must not be `None`")  # noqa: E501
 
         self._compute_id = compute_id
 
@@ -185,8 +185,8 @@ class VDU(object):
         :param image_name: The image_name of this VDU.  # noqa: E501
         :type: str
         """
-        if image_name is None:
-            raise ValueError("Invalid value for `image_name`, must not be `None`")  # noqa: E501
+        #if image_name is None:
+            #raise ValueError("Invalid value for `image_name`, must not be `None`")  # noqa: E501
 
         self._image_name = image_name
 
@@ -210,8 +210,8 @@ class VDU(object):
         :param ip: The ip of this VDU.  # noqa: E501
         :type: str
         """
-        if ip is None:
-            raise ValueError("Invalid value for `ip`, must not be `None`")  # noqa: E501
+        #if ip is None:
+            #raise ValueError("Invalid value for `ip`, must not be `None`")  # noqa: E501
 
         self._ip = ip
 
@@ -258,8 +258,8 @@ class VDU(object):
         :param name: The name of this VDU.  # noqa: E501
         :type: str
         """
-        if name is None:
-            raise ValueError("Invalid value for `name`, must not be `None`")  # noqa: E501
+        #if name is None:
+            #raise ValueError("Invalid value for `name`, must not be `None`")  # noqa: E501
 
         self._name = name
 
@@ -283,8 +283,8 @@ class VDU(object):
         :param net_name: The net_name of this VDU.  # noqa: E501
         :type: str
         """
-        if net_name is None:
-            raise ValueError("Invalid value for `net_name`, must not be `None`")  # noqa: E501
+        #if net_name is None:
+            #raise ValueError("Invalid value for `net_name`, must not be `None`")  # noqa: E501
 
         self._net_name = net_name
 
@@ -308,8 +308,8 @@ class VDU(object):
         :param po_p_name: The po_p_name of this VDU.  # noqa: E501
         :type: str
         """
-        if po_p_name is None:
-            raise ValueError("Invalid value for `po_p_name`, must not be `None`")  # noqa: E501
+        #if po_p_name is None:
+            #raise ValueError("Invalid value for `po_p_name`, must not be `None`")  # noqa: E501
 
         self._po_p_name = po_p_name
 

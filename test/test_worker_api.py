@@ -32,6 +32,7 @@ class TestWorkerApi(unittest.TestCase):
     def tearDown(self):
         pass
 
+    @unittest.skip
     def test_delete_worker(self):
         """
         Test case for delete_worker
@@ -41,6 +42,7 @@ class TestWorkerApi(unittest.TestCase):
         self.api.delete_worker(id="2b99ba90-ed38-4ec1-bfe7-de0db3008aa4")
         pass
 
+    @unittest.skip
     def test_get_all_workers(self):
         """
         Test case for get_all_workers
@@ -50,6 +52,7 @@ class TestWorkerApi(unittest.TestCase):
         print(self.api.get_all_workers())
         pass
 
+    @unittest.skip
     def test_install_adapter(self):
         """
         Test case for install_adapter
@@ -59,6 +62,7 @@ class TestWorkerApi(unittest.TestCase):
         self.api.install_adapter(id="277c254a-6395-4d1e-96a5-2d992a39222d", type="docker")
         pass
 
+    @unittest.skip
     def test_register_worker(self):
         """
         Test case for register_worker

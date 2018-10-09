@@ -32,6 +32,7 @@ class TestPoPApi(unittest.TestCase):
     def tearDown(self):
         pass
 
+    @unittest.skip
     def test_get_all_po_ps(self):
         """
         Test case for get_all_po_ps
@@ -41,6 +42,7 @@ class TestPoPApi(unittest.TestCase):
         self.api.get_all_po_ps()
         pass
 
+    @unittest.skip
     def test_get_po_p_by_id(self):
         """
         Test case for get_po_p_by_id
@@ -50,6 +52,7 @@ class TestPoPApi(unittest.TestCase):
         self.api.get_po_p_by_id("927ae1d3-89b7-4444-8377-a1e16c890785")
         pass
 
+    @unittest.skip
     def test_register_po_p(self):
         """
         Test case for register_po_p
@@ -60,6 +63,7 @@ class TestPoPApi(unittest.TestCase):
         self.api.register_po_p(body=pop.to_dict())
         pass
 
+    @unittest.skip
     def test_unregister_po_p(self):
         """
         Test case for unregister_po_p
@@ -69,6 +73,7 @@ class TestPoPApi(unittest.TestCase):
         self.api.unregister_po_p("ae2c4e87-d145-4e07-a437-7a376a24cea5")
         pass
 
+    @unittest.skip
     def test_update_po_p(self):
         """
         Test case for update_po_p

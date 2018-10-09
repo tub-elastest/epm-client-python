@@ -35,7 +35,7 @@ class TestVDU(unittest.TestCase):
         """
         Test VDU
         """
-        model = epm_client.models.vdu.VDU()
+        model = epm_client.models.vdu.VDU(compute_id="1234", image_name="test", ip="example.com", name="test", net_name="net1", po_p_name="pop1")
 
 
 if __name__ == '__main__':

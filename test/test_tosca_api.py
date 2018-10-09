@@ -31,6 +31,7 @@ class TestTOSCAApi(unittest.TestCase):
     def tearDown(self):
         pass
 
+    @unittest.skip
     def test_deploy_tosca_template(self):
         """
         Test case for deploy_tosca_template

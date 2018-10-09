@@ -32,6 +32,7 @@ class TestVDUApi(unittest.TestCase):
     def tearDown(self):
         pass
 
+    @unittest.skip
     def test_delete_vdu(self):
         """
         Test case for delete_vdu
@@ -41,6 +42,7 @@ class TestVDUApi(unittest.TestCase):
         self.api.delete_vdu("0342b850-6766-4608-a2d3-49dfbd71bf6f")
         pass
 
+    @unittest.skip
     def test_deploy_vdu(self):
         """
         Test case for deploy_vdu
@@ -51,6 +53,7 @@ class TestVDUApi(unittest.TestCase):
         self.api.deploy_vdu(vdu.to_dict())
         pass
 
+    @unittest.skip
     def test_get_all_vdus(self):
         """
         Test case for get_all_vdus
@@ -60,6 +63,7 @@ class TestVDUApi(unittest.TestCase):
         self.api.get_all_vdus()
         pass
 
+    @unittest.skip
     def test_get_vdu_by_id(self):
         """
         Test case for get_vdu_by_id
@@ -69,6 +73,7 @@ class TestVDUApi(unittest.TestCase):
         self.api.get_vdu_by_id("843a5753-fa80-41de-9c46-cb8d9754a97f")
         pass
 
+    @unittest.skip
     def test_update_vdu(self):
         """
         Test case for update_vdu

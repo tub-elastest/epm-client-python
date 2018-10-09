@@ -31,6 +31,7 @@ class TestKeyApi(unittest.TestCase):
     def tearDown(self):
         pass
 
+    @unittest.skip
     def test_add_key(self):
         """
         Test case for add_key
@@ -39,6 +40,7 @@ class TestKeyApi(unittest.TestCase):
         """
         pass
 
+    @unittest.skip
     def test_delete_key(self):
         """
         Test case for delete_key
@@ -48,6 +50,7 @@ class TestKeyApi(unittest.TestCase):
         self.api.delete_key(id="8486fea1-b334-4c5d-8eed-8745bf04dcb1")
         pass
 
+    @unittest.skip
     def test_get_all_keys(self):
         """
         Test case for get_all_keys

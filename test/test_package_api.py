@@ -31,7 +31,7 @@ class TestPackageApi(unittest.TestCase):
     def tearDown(self):
         pass
 
-
+    @unittest.skip
     def test_receive_delete_package(self):
         """
         Test case for receive_package

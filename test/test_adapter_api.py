@@ -31,6 +31,7 @@ class TestAdapterApi(unittest.TestCase):
     def tearDown(self):
         pass
 
+    @unittest.skip
     def test_get_all_adapters(self):
         """
         Test case for get_all_adapters

@@ -32,6 +32,7 @@ class TestNetworkApi(unittest.TestCase):
     def tearDown(self):
         pass
 
+    @unittest.skip
     def test_create_network(self):
         """
         Test case for create_network
@@ -42,6 +43,7 @@ class TestNetworkApi(unittest.TestCase):
         self.api.create_network(network)
         pass
 
+    @unittest.skip
     def test_delete_network(self):
         """
         Test case for delete_network
@@ -51,6 +53,7 @@ class TestNetworkApi(unittest.TestCase):
         self.api.delete_network("7f5ebaf0-13a4-4c82-a905-f563c7815b92")
         pass
 
+    @unittest.skip
     def test_get_all_networks(self):
         """
         Test case for get_all_networks
@@ -60,6 +63,7 @@ class TestNetworkApi(unittest.TestCase):
         self.api.get_all_networks()
         pass
 
+    @unittest.skip
     def test_get_network_by_id(self):
         """
         Test case for get_network_by_id
@@ -69,6 +73,7 @@ class TestNetworkApi(unittest.TestCase):
         self.api.get_network_by_id("36255e82-f536-4bf0-8af5-a04c9ed37fc3")
         pass
 
+    @unittest.skip
     def test_update_network(self):
         """
         Test case for update_network

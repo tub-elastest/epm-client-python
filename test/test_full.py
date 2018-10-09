@@ -11,6 +11,7 @@ import epm_client
 from epm_client.rest import ApiException
 from epm_client.apis.key_api import KeyApi
 from epm_client.api_client import ApiClient
+from epm_client.models import PoP
 from epm_client.models import CommandExecutionBody
 
 
@@ -26,22 +27,26 @@ class FullTest(unittest.TestCase):
         self.adapter_api = epm_client.apis.AdapterApi(api_client=api_client)
         self.pop_api = epm_client.apis.PoPApi(api_client=api_client)
 
+    @unittest.skip
     def test(self):
-        sleep(120)
+        #sleep(120)
         adapters = self.adapter_api.get_all_adapters()
-        docker_found = False
-        for a in adapters:
-            if a.type == "docker":
-                docker_found = True
-
-        pops = self.pop_api.get_all_po_ps()
         ansible_found = False
-        for pop in pops:
-            for kvp in pop.interface_info:
-                if kvp.key == "type" and kvp.value == "ansible":
-                    ansible_found = True
+        for a in adapters:
+            if a.type == "ansible":
+                ansible_found = True
         assert ansible_found
-        assert docker_found
+
+        os_pop = PoP( interface_endpoint="<REPLACE>", interface_info=[{"key": "type", "value": "<REPLACE>"},
+                                                                                   {"key": "username",
+                                                                                    "value": "<REPLACE>"},
+                                                                                   {"key": "password",
+                                                                                    "value": "<REPLACE>"},
+                                                                                   {"key": "project_name",
+                                                                                    "value": "<REPLACE>"},
+                                                                                   {"key": "auth_url",
+                                                                                    "value": "<REPLACE>"}], name="os-dc1")
+        self.pop_api.register_po_p(os_pop)
 
         ansible_package = self.package_api.receive_package(file='resources/ansible-package.tar')
 
@@ -68,15 +73,8 @@ class FullTest(unittest.TestCase):
         command = CommandExecutionBody(command="ls /", await_completion=True)
         self.runtime_api.execute_on_instance(id=compose_package.vdus[0].id, command_execution_body=command)
 
-        # LAUNCH DOCKER PACKAGE
-        docker_package = self.package_api.receive_package("resources/docker-package.tar")
-        assert len(docker_package.vdus) > 0
-        command = CommandExecutionBody(command="ls /", await_completion=True)
-        self.runtime_api.execute_on_instance(id=docker_package.vdus[0].id, command_execution_body=command)
-
         # CLEAN
         self.package_api.delete_package(compose_package.id)
-        self.package_api.delete_package(docker_package.id)
         self.worker_api.delete_worker(w.id)
         self.key_api.delete_key(k.id)
         self.package_api.delete_package(ansible_package.id)

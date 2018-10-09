@@ -32,6 +32,7 @@ class TestResourceGroupApi(unittest.TestCase):
     def tearDown(self):
         pass
 
+    @unittest.skip
     def test_create_resource_group(self):
         """
         Test case for create_resource_group
@@ -51,6 +52,7 @@ class TestResourceGroupApi(unittest.TestCase):
         self.api.create_resource_group(resourceGroup.to_dict())
         pass
 
+    @unittest.skip
     def test_delete_resource_group(self):
         """
         Test case for delete_resource_group
@@ -60,6 +62,7 @@ class TestResourceGroupApi(unittest.TestCase):
         self.api.delete_resource_group("7133fe79-cbb0-45aa-a078-0a4bb067c2fc")
         pass
 
+    @unittest.skip
     def test_get_all_resource_groups(self):
         """
         Test case for get_all_resource_groups
@@ -69,6 +72,7 @@ class TestResourceGroupApi(unittest.TestCase):
         self.api.get_all_resource_groups()
         pass
 
+    @unittest.skip
     def test_get_resource_group_by_id(self):
         """
         Test case for get_resource_group_by_id
@@ -78,6 +82,7 @@ class TestResourceGroupApi(unittest.TestCase):
         self.api.get_resource_group_by_id("cf87eb7e-1550-4404-a8e3-084e66500912")
         pass
 
+    @unittest.skip
     def test_update_resource_group(self):
         """
         Test case for update_resource_group

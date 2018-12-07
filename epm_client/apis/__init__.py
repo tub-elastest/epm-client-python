@@ -11,3 +11,5 @@ from .runtime_api import RuntimeApi
 from .tosca_api import TOSCAApi
 from .vdu_api import VDUApi
 from .worker_api import WorkerApi
+from .default_api import DefaultApi
+from .cluster_api import ClusterApi

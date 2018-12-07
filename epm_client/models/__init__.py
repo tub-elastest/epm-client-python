@@ -26,3 +26,7 @@ from .po_p import PoP
 from .resource_group import ResourceGroup
 from .vdu import VDU
 from .worker import Worker
+from .worker_from_vdu import WorkerFromVDU
+from .cluster import Cluster
+from .cluster_from_resource_group import ClusterFromResourceGroup
+from .auth_credentials import AuthCredentials

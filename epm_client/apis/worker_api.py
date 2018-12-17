@@ -51,6 +51,110 @@ class WorkerApi(object):
                 config.api_client = ApiClient()
             self.api_client = config.api_client
 
+    def create_worker(self, worker_from_vdu, **kwargs):
+        """
+        Creates a new worker.
+        Receives a package that can be used for creating a new worker.
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.create_worker(worker_from_vdu, callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param WorkerFromVDU worker_from_vdu: Body to create Worker from VDU (required)
+        :return: Worker
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('callback'):
+            return self.create_worker_with_http_info(worker_from_vdu, **kwargs)
+        else:
+            (data) = self.create_worker_with_http_info(worker_from_vdu, **kwargs)
+            return data
+
+    def create_worker_with_http_info(self, worker_from_vdu, **kwargs):
+        """
+        Creates a new worker.
+        Receives a package that can be used for creating a new worker.
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.create_worker_with_http_info(worker_from_vdu, callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param WorkerFromVDU worker_from_vdu: Body to create Worker from VDU (required)
+        :return: Worker
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['worker_from_vdu']
+        all_params.append('callback')
+        all_params.append('_return_http_data_only')
+
+        params = locals()
+        for key, val in iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method create_worker" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'worker_from_vdu' is set
+        if ('worker_from_vdu' not in params) or (params['worker_from_vdu'] is None):
+            raise ValueError("Missing the required parameter `worker_from_vdu` when calling `create_worker`")
+
+        resource_path = '/workers/create'.replace('{format}', 'json')
+        path_params = {}
+
+        query_params = {}
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        if 'worker_from_vdu' in params:
+            body_params = params['worker_from_vdu']
+
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.\
+            select_header_accept(['application/json'])
+        if not header_params['Accept']:
+            del header_params['Accept']
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.\
+            select_header_content_type(['application/json'])
+
+        # Authentication setting
+        auth_settings = []
+
+        return self.api_client.call_api(resource_path, 'POST',
+                                            path_params,
+                                            query_params,
+                                            header_params,
+                                            body=body_params,
+                                            post_params=form_params,
+                                            files=local_var_files,
+                                            response_type='Worker',
+                                            auth_settings=auth_settings,
+                                            callback=params.get('callback'),
+                                            _return_http_data_only=params.get('_return_http_data_only'))
+
     def delete_worker(self, id, **kwargs):
         """
         Deletes a Worker.

@@ -38,6 +38,7 @@ from .apis.runtime_api import RuntimeApi
 from .apis.tosca_api import TOSCAApi
 from .apis.vdu_api import VDUApi
 from .apis.worker_api import WorkerApi
+from .apis.cluster_api import ClusterApi
 
 # import ApiClient
 from .api_client import ApiClient

@@ -51,6 +51,221 @@ class ClusterApi(object):
                 config.api_client = ApiClient()
             self.api_client = config.api_client
 
+    def add_worker(self, id, machine_id, **kwargs):
+        """
+        Adds a worker to the cluster.
+        
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.add_worker(id, machine_id, callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param str id: ID of Cluster (required)
+        :param str machine_id: The ID of either a Worker or a VDU, which will be added to the cluster (required)
+        :return: str
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('callback'):
+            return self.add_worker_with_http_info(id, machine_id, **kwargs)
+        else:
+            (data) = self.add_worker_with_http_info(id, machine_id, **kwargs)
+            return data
+
+    def add_worker_with_http_info(self, id, machine_id, **kwargs):
+        """
+        Adds a worker to the cluster.
+        
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.add_worker_with_http_info(id, machine_id, callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param str id: ID of Cluster (required)
+        :param str machine_id: The ID of either a Worker or a VDU, which will be added to the cluster (required)
+        :return: str
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['id', 'machine_id']
+        all_params.append('callback')
+        all_params.append('_return_http_data_only')
+
+        params = locals()
+        for key, val in iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method add_worker" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'id' is set
+        if ('id' not in params) or (params['id'] is None):
+            raise ValueError("Missing the required parameter `id` when calling `add_worker`")
+        # verify the required parameter 'machine_id' is set
+        if ('machine_id' not in params) or (params['machine_id'] is None):
+            raise ValueError("Missing the required parameter `machine_id` when calling `add_worker`")
+
+        resource_path = '/cluster/{id}/add/{machineId}'.replace('{format}', 'json')
+        path_params = {}
+        if 'id' in params:
+            path_params['id'] = params['id']
+        if 'machine_id' in params:
+            path_params['machineId'] = params['machine_id']
+
+        query_params = {}
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.\
+            select_header_accept(['application/json'])
+        if not header_params['Accept']:
+            del header_params['Accept']
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.\
+            select_header_content_type([])
+
+        # Authentication setting
+        auth_settings = []
+
+        return self.api_client.call_api(resource_path, 'GET',
+                                            path_params,
+                                            query_params,
+                                            header_params,
+                                            body=body_params,
+                                            post_params=form_params,
+                                            files=local_var_files,
+                                            response_type='str',
+                                            auth_settings=auth_settings,
+                                            callback=params.get('callback'),
+                                            _return_http_data_only=params.get('_return_http_data_only'))
+
+    def create_cluster(self, cluster_from_resource_group, **kwargs):
+        """
+        Creates a new cluster.
+        Receives an Identifier for a ResourceGroup and an array of types to setup the Resource Group as a cluster.
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.create_cluster(cluster_from_resource_group, callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param ClusterFromResourceGroup cluster_from_resource_group: Body to create Cluster from ResourceGroup (required)
+        :return: Cluster
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('callback'):
+            return self.create_cluster_with_http_info(cluster_from_resource_group, **kwargs)
+        else:
+            (data) = self.create_cluster_with_http_info(cluster_from_resource_group, **kwargs)
+            return data
+
+    def create_cluster_with_http_info(self, cluster_from_resource_group, **kwargs):
+        """
+        Creates a new cluster.
+        Receives an Identifier for a ResourceGroup and an array of types to setup the Resource Group as a cluster.
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.create_cluster_with_http_info(cluster_from_resource_group, callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param ClusterFromResourceGroup cluster_from_resource_group: Body to create Cluster from ResourceGroup (required)
+        :return: Cluster
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['cluster_from_resource_group']
+        all_params.append('callback')
+        all_params.append('_return_http_data_only')
+
+        params = locals()
+        for key, val in iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method create_cluster" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'cluster_from_resource_group' is set
+        if ('cluster_from_resource_group' not in params) or (params['cluster_from_resource_group'] is None):
+            raise ValueError("Missing the required parameter `cluster_from_resource_group` when calling `create_cluster`")
+
+        resource_path = '/cluster/create'.replace('{format}', 'json')
+        path_params = {}
+
+        query_params = {}
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        if 'cluster_from_resource_group' in params:
+            body_params = params['cluster_from_resource_group']
+
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.\
+            select_header_accept(['application/json'])
+        if not header_params['Accept']:
+            del header_params['Accept']
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.\
+            select_header_content_type(['application/json'])
+
+        # Authentication setting
+        auth_settings = []
+
+        return self.api_client.call_api(resource_path, 'POST',
+                                            path_params,
+                                            query_params,
+                                            header_params,
+                                            body=body_params,
+                                            post_params=form_params,
+                                            files=local_var_files,
+                                            response_type='Cluster',
+                                            auth_settings=auth_settings,
+                                            callback=params.get('callback'),
+                                            _return_http_data_only=params.get('_return_http_data_only'))
+
     def delete_cluster(self, id, **kwargs):
         """
         Deletes a Cluster.

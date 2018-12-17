@@ -14,24 +14,39 @@ from epm_client.apis.key_api import KeyApi
 from epm_client.api_client import ApiClient
 from epm_client.models import PoP
 from epm_client.models import CommandExecutionBody
-from epm_client.models import WorkerFromVDU
+from epm_client.models import WorkerFromVDU, ClusterFromResourceGroup
 
 
 class FullTest(unittest.TestCase):
     """ KeyApi unit test stubs """
 
     def setUp(self):
-        api_client = ApiClient(host="http://elastest-epm:8180/v1")
+        api_client = ApiClient(host="http://<REPLACE>:8180/v1")
         self.key_api = epm_client.apis.key_api.KeyApi(api_client=api_client)
         self.worker_api = epm_client.apis.worker_api.WorkerApi(api_client=api_client)
         self.package_api = epm_client.apis.PackageApi(api_client=api_client)
         self.runtime_api = epm_client.apis.RuntimeApi(api_client=api_client)
         self.adapter_api = epm_client.apis.AdapterApi(api_client=api_client)
         self.pop_api = epm_client.apis.PoPApi(api_client=api_client)
-        self.default_api = epm_client.apis.DefaultApi(api_client=api_client)
         self.cluster_api = epm_client.apis.ClusterApi(api_client=api_client)
 
-        os_pop = PoP(interface_endpoint="<REPLACE>",
+    '''
+    
+    Test Case 1 - From EPM and EPM Adapter ansible to Docker Compose Package launched on a worker
+    
+    Steps:
+    1) Register an OS PoP
+    2) Start a VM using the ansible adapter and reigster it as a VDU
+    3) Make the VDU a Worker using the Worker API
+    4) Setup Docker Compose and the EPM Docker Compose Adapter on the Worker using the Worker API
+    5) Launch a Docker Compose package on the Worker
+    6) Clean and Exit
+    
+    '''
+    @unittest.skip
+    def test_case_1(self):
+
+        os_pop = PoP(interface_endpoint="http://<REPLACE>:5000/v2.0",
                      interface_info=[{"key": "type", "value": "openstack"},
                                      {"key": "username",
                                       "value": "<REPLACE>"},
@@ -40,11 +55,9 @@ class FullTest(unittest.TestCase):
                                      {"key": "project_name",
                                       "value": "<REPLACE>"},
                                      {"key": "auth_url",
-                                      "value": "<REPLACE>"}], name="os-dc1")
+                                      "value": "http://<REPLACE>:5000/v2.0"}], name="os-dc1", status="active")
         self.pop_api.register_po_p(os_pop)
 
-    #@unittest.skip
-    def test(self):
         #sleep(120)
         adapters = self.adapter_api.get_all_adapters()
         ansible_found = False
@@ -53,15 +66,17 @@ class FullTest(unittest.TestCase):
                 ansible_found = True
         assert ansible_found
 
+
         ansible_package = self.package_api.receive_package(file='resources/ansible-package.tar')
         print(ansible_package)
 
         sleep(15)
-        type = List[str]
-        worker_from_vdu = WorkerFromVDU(type=[], vdu_id=ansible_package.vdus[0].id)
-        w = self.default_api.create_worker(worker_from_vdu=worker_from_vdu)
+        print(ansible_package.vdus[0].id)
+        worker_from_vdu = WorkerFromVDU(type=["docker-compose"], vdu_id=ansible_package.vdus[0].id)
+        w = self.worker_api.create_worker(worker_from_vdu=worker_from_vdu)
 
-        self.worker_api.install_adapter(w.id, "docker-compose")
+        #print(w)
+        #self.worker_api.install_adapter(id=w.id, type="docker-compose")
 
         # LAUNCH COMPOSE PACKAGE
         sleep(10)
@@ -75,8 +90,54 @@ class FullTest(unittest.TestCase):
         self.worker_api.delete_worker(w.id)
         self.package_api.delete_package(ansible_package.id)
 
-        print("Test completed :)")
+        print("Test case 1 completed :)")
 
+
+    ''' 
+    
+    Test Case 2 - From EPM and EPM Ansible Adapter - Launch a K8s Cluster and add a new node
+    
+    '''
+
+    #@unittest.skip
+    def test_case_2(self):
+        os_pop = PoP(interface_endpoint="http://<REPLACE>:5000/v2.0",
+                     interface_info=[{"key": "type", "value": "openstack"},
+                                     {"key": "username",
+                                      "value": "<REPLACE>"},
+                                     {"key": "password",
+                                      "value": "<REPLACE>"},
+                                     {"key": "project_name",
+                                      "value": "<REPLACE>"},
+                                     {"key": "auth_url",
+                                      "value": "http://<REPLACE>:5000/v2.0"}], name="os-dc1", status="active")
+        self.pop_api.register_po_p(os_pop)
+
+        # sleep(120)
+        adapters = self.adapter_api.get_all_adapters()
+        ansible_found = False
+        for a in adapters:
+            if a.type == "ansible":
+                ansible_found = True
+        assert ansible_found
+
+        ansible_package = self.package_api.receive_package(file='resources/ansible-package2.tar')
+        print(ansible_package)
+
+        ansible_package_single = self.package_api.receive_package(file='resources/ansible-package.tar')
+        print(ansible_package_single)
+
+        cluster_from_resource_group = ClusterFromResourceGroup(resource_group_id=ansible_package.id, type=["kubernetes"], master_id=ansible_package.vdus[0].id)
+        cluster = self.cluster_api.create_cluster(cluster_from_resource_group=cluster_from_resource_group)
+
+        self.cluster_api.add_worker(id=cluster.id, machine_id=ansible_package_single.vdus[0].id)
+
+        print(self.cluster_api.get_all_clusters())
+
+        self.cluster_api.delete_cluster(id=cluster.id)
+        self.package_api.delete_package(ansible_package.id)
+        self.package_api.delete_package(ansible_package_single.id)
+        print("Test case 2 completed :)")
 
 if __name__ == '__main__':
     unittest.main()

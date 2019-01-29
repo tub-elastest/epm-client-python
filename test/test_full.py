@@ -6,15 +6,13 @@ import unittest
 import json
 from time import sleep
 import tarfile
-from typing import List
 
 import epm_client
 from epm_client.rest import ApiException
 from epm_client.apis.key_api import KeyApi
 from epm_client.api_client import ApiClient
-from epm_client.models import PoP
+from epm_client.models import PoP, ClusterFromResourceGroup
 from epm_client.models import CommandExecutionBody
-from epm_client.models import WorkerFromVDU, ClusterFromResourceGroup
 
 
 class FullTest(unittest.TestCase):
@@ -30,34 +28,8 @@ class FullTest(unittest.TestCase):
         self.pop_api = epm_client.apis.PoPApi(api_client=api_client)
         self.cluster_api = epm_client.apis.ClusterApi(api_client=api_client)
 
-    '''
-    
-    Test Case 1 - From EPM and EPM Adapter ansible to Docker Compose Package launched on a worker
-    
-    Steps:
-    1) Register an OS PoP
-    2) Start a VM using the ansible adapter and reigster it as a VDU
-    3) Make the VDU a Worker using the Worker API
-    4) Setup Docker Compose and the EPM Docker Compose Adapter on the Worker using the Worker API
-    5) Launch a Docker Compose package on the Worker
-    6) Clean and Exit
-    
-    '''
     @unittest.skip
-    def test_case_1(self):
-
-        os_pop = PoP(interface_endpoint="http://<REPLACE>:5000/v2.0",
-                     interface_info=[{"key": "type", "value": "openstack"},
-                                     {"key": "username",
-                                      "value": "<REPLACE>"},
-                                     {"key": "password",
-                                      "value": "<REPLACE>"},
-                                     {"key": "project_name",
-                                      "value": "<REPLACE>"},
-                                     {"key": "auth_url",
-                                      "value": "http://<REPLACE>:5000/v2.0"}], name="os-dc1", status="active")
-        self.pop_api.register_po_p(os_pop)
-
+    def test(self):
         #sleep(120)
         adapters = self.adapter_api.get_all_adapters()
         ansible_found = False
@@ -66,17 +38,35 @@ class FullTest(unittest.TestCase):
                 ansible_found = True
         assert ansible_found
 
+        os_pop = PoP( interface_endpoint="<REPLACE>", interface_info=[{"key": "type", "value": "openstack"},
+                                                                                   {"key": "username",
+                                                                                    "value": "<REPLACE>"},
+                                                                                   {"key": "password",
+                                                                                    "value": "<REPLACE>"},
+                                                                                   {"key": "project_name",
+                                                                                    "value": "<REPLACE>"},
+                                                                                   {"key": "auth_url",
+                                                                                    "value": "<REPLACE>"}], name="os-dc1")
+        self.pop_api.register_po_p(os_pop)
 
         ansible_package = self.package_api.receive_package(file='resources/ansible-package.tar')
         print(ansible_package)
 
         sleep(15)
-        print(ansible_package.vdus[0].id)
-        worker_from_vdu = WorkerFromVDU(type=["docker-compose"], vdu_id=ansible_package.vdus[0].id)
-        w = self.worker_api.create_worker(worker_from_vdu=worker_from_vdu)
 
-        #print(w)
-        #self.worker_api.install_adapter(id=w.id, type="docker-compose")
+        with open('resources/key.json', encoding="UTF-8") as f:
+            x = f.read()
+            x = x.replace('\n', '\\n')
+            print(x)
+            data = json.loads(x, strict=False)
+        k = self.key_api.add_key(data)
+
+        with open('resources/worker.json') as f:
+            data = json.load(f)
+        w = self.worker_api.register_worker(data)
+
+        self.worker_api.install_adapter(w.id, "docker")
+        self.worker_api.install_adapter(w.id, "docker-compose")
 
         # LAUNCH COMPOSE PACKAGE
         sleep(10)
@@ -88,7 +78,10 @@ class FullTest(unittest.TestCase):
         # CLEAN
         self.package_api.delete_package(compose_package.id)
         self.worker_api.delete_worker(w.id)
+        self.key_api.delete_key(k.id)
         self.package_api.delete_package(ansible_package.id)
+
+        print("Test completed :)")
 
         print("Test case 1 completed :)")
 
@@ -99,7 +92,7 @@ class FullTest(unittest.TestCase):
     
     '''
 
-    #@unittest.skip
+    @unittest.skip
     def test_case_2(self):
         os_pop = PoP(interface_endpoint="http://<REPLACE>:5000/v2.0",
                      interface_info=[{"key": "type", "value": "openstack"},
@@ -134,6 +127,10 @@ class FullTest(unittest.TestCase):
 
         print(self.cluster_api.get_all_clusters())
 
+        self.cluster_api.remove_node(id=cluster.id, worker_id=cluster.nodes[0].id)
+
+        print(self.cluster_api.get_all_clusters())
+
         self.cluster_api.delete_cluster(id=cluster.id)
         self.package_api.delete_package(ansible_package.id)
         self.package_api.delete_package(ansible_package_single.id)
@@ -141,4 +138,3 @@ class FullTest(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
-

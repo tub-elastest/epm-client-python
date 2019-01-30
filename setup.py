@@ -36,7 +36,7 @@ setup(
     version='0.9.0',
     description="EPM REST API",
     author_email="michael.pauls@tu-berlin.de",
-    url="https://github.com/mpauls/epm-client-python",
+    url="https://github.com/tub-elastest/epm-client-python",
     keywords=["Swagger", "Python", "EPM REST Client"],
     install_requires=[],
     packages=find_packages(exclude=['docs','test']),

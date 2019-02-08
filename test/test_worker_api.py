@@ -69,7 +69,7 @@ class TestWorkerApi(unittest.TestCase):
 
         Registers the worker and saves the information.
         """
-        w = Worker(ip="192.168.161.162", user="ubuntu", passphrase="", password="", epm_ip="10.147.65.145", keyname="mykey")
+        w = Worker(ip="test", user="ubuntu", passphrase="", password="", epm_ip="test-epm", keyname="test-key")
         self.api.register_worker(w)
         pass
 

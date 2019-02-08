@@ -6,7 +6,7 @@ services:
         volumes:
             - /var/run/docker.sock:/var/run/docker.sock:ro
         environment:
-            - ET_PUBLIC_HOST=10.147.65.145
+            - ET_PUBLIC_HOST=<REPLACE>
         expose:
             - 8180
         ports:

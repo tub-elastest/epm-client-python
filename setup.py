@@ -33,7 +33,7 @@ REQUIRES = ["urllib3 >= 1.15", "six >= 1.10", "certifi", "python-dateutil"]
 
 setup(
     name='epm_client',
-    version='0.9.0',
+    version='1.0.0',
     description="EPM REST API",
     author_email="michael.pauls@tu-berlin.de",
     url="https://github.com/tub-elastest/epm-client-python",

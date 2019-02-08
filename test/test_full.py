@@ -12,14 +12,31 @@ from epm_client.rest import ApiException
 from epm_client.apis.key_api import KeyApi
 from epm_client.api_client import ApiClient
 from epm_client.models import PoP, ClusterFromResourceGroup
-from epm_client.models import CommandExecutionBody
+from epm_client.models import CommandExecutionBody, WorkerFromVDU
+
+from keystoneauth1.identity import v3
+from keystoneauth1 import session
+from keystoneclient.v3 import client
 
 
 class FullTest(unittest.TestCase):
     """ KeyApi unit test stubs """
 
     def setUp(self):
-        api_client = ApiClient(host="http://<REPLACE>:8180/v1")
+        aaa = False
+        if aaa:
+            print('AAA is enabled')
+            auth = v3.Password(auth_url="http://keystone:35357/v3", username="admin", password="admin", project_name="admin",
+                               user_domain_name="Default", project_domain_name="Default")
+            sess = session.Session(auth=auth)
+            keystone = client.Client(session=sess)
+            keystone.authenticate(auth_url="http://keystone:35357/v3", username="admin", password="admin",
+                                  project_name="admin", user_domain_name="Default", project_domain_name="Default")
+            api_client = ApiClient(host="http://epm:8180/v1", header_name="Authorization",
+                                   header_value=keystone.auth_ref.auth_token)
+            print('Authorized')
+        else:
+            api_client = ApiClient(host="http://epm:8180/v1")
         self.key_api = epm_client.apis.key_api.KeyApi(api_client=api_client)
         self.worker_api = epm_client.apis.worker_api.WorkerApi(api_client=api_client)
         self.package_api = epm_client.apis.PackageApi(api_client=api_client)
@@ -38,7 +55,7 @@ class FullTest(unittest.TestCase):
                 ansible_found = True
         assert ansible_found
 
-        os_pop = PoP( interface_endpoint="<REPLACE>", interface_info=[{"key": "type", "value": "openstack"},
+        os_pop = PoP( interface_endpoint="http://<REPLACE>:5000/v2.0", interface_info=[{"key": "type", "value": "openstack"},
                                                                                    {"key": "username",
                                                                                     "value": "<REPLACE>"},
                                                                                    {"key": "password",
@@ -46,7 +63,7 @@ class FullTest(unittest.TestCase):
                                                                                    {"key": "project_name",
                                                                                     "value": "<REPLACE>"},
                                                                                    {"key": "auth_url",
-                                                                                    "value": "<REPLACE>"}], name="os-dc1")
+                                                                                    "value": "http://<REPLACE>:5000/v2.0"}], name="os-dc1")
         self.pop_api.register_po_p(os_pop)
 
         ansible_package = self.package_api.receive_package(file='resources/ansible-package.tar')
@@ -54,22 +71,19 @@ class FullTest(unittest.TestCase):
 
         sleep(15)
 
-        with open('resources/key.json', encoding="UTF-8") as f:
-            x = f.read()
-            x = x.replace('\n', '\\n')
-            print(x)
-            data = json.loads(x, strict=False)
-        k = self.key_api.add_key(data)
-
-        with open('resources/worker.json') as f:
-            data = json.load(f)
-        w = self.worker_api.register_worker(data)
-
-        self.worker_api.install_adapter(w.id, "docker")
-        self.worker_api.install_adapter(w.id, "docker-compose")
+        worker_from_vdu = WorkerFromVDU(type=["docker", "docker-compose"], vdu_id=ansible_package.vdus[0].id)
+        w = self.worker_api.create_worker(worker_from_vdu=worker_from_vdu)
 
         # LAUNCH COMPOSE PACKAGE
-        sleep(10)
+        compose_found = False
+        for _ in (0, 10):
+            adapters = self.adapter_api.get_all_adapters()
+            for a in adapters:
+                if a.type == "docker-compose":
+                    compose_found = True
+            sleep(6)
+        assert compose_found
+
         compose_package = self.package_api.receive_package('resources/compose-package.tar')
         assert len(compose_package.vdus) > 0
         command = CommandExecutionBody(command="ls /", await_completion=True)
@@ -78,7 +92,6 @@ class FullTest(unittest.TestCase):
         # CLEAN
         self.package_api.delete_package(compose_package.id)
         self.worker_api.delete_worker(w.id)
-        self.key_api.delete_key(k.id)
         self.package_api.delete_package(ansible_package.id)
 
         print("Test completed :)")

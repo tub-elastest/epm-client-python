@@ -187,7 +187,7 @@ class FullTest(unittest.TestCase):
         cluster = self.cluster_api.register_cluster(cluster)
         print(cluster)
 
-        ansible_package_single = self.package_api.receive_package(file='/home/rvl/projects/elastest/demo/ansible-package3.tar')
+        ansible_package_single = self.package_api.receive_package(file='ansible-package.tar')
         print(ansible_package_single)
 
         self.cluster_api.add_worker(id=cluster.id, machine_id=ansible_package_single.vdus[0].id)
@@ -198,8 +198,8 @@ class FullTest(unittest.TestCase):
 
         print(self.cluster_api.get_all_clusters())
 
-        #self.cluster_api.delete_cluster(id=cluster.id)
-        #self.package_api.delete_package(ansible_package_single.id)
+        self.cluster_api.delete_cluster(id=cluster.id)
+        self.package_api.delete_package(ansible_package_single.id)
         print("Test case 3 completed :)")
 
         end = time.time()
